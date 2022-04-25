@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:github_flutter_bloc/config/themes.dart';
 import 'package:github_flutter_bloc/modules/screen/home_screen.dart';
 import 'package:github_flutter_bloc/modules/screen/repository_screen.dart';
+import 'package:github_flutter_bloc/modules/screen/splash_screen.dart';
 import 'package:github_flutter_bloc/modules/screen/user_screen.dart';
 import 'package:github_flutter_bloc/service/provider/github_api_service.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
@@ -21,14 +22,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Github Bloc',
       theme: themeBlue,
-      routes: {
-        '/': (context) => const HomeScreen(),
-        '/repository': (context) =>
-            RepositoryScreen(githubRepositorySearch: githubRepositorySearch),
-        '/user': (context) => const UserScreen()
-      },
+      home: const SplashScreen(),
+      // routes: {
+      //   '/': (context) => const HomeScreen(),
+      //   '/repository': (context) =>
+      //       RepositoryScreen(githubRepositorySearch: githubRepositorySearch),
+      //   '/user': (context) => const UserScreen()
+      // },
     );
   }
 }

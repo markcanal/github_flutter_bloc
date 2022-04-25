@@ -40,14 +40,22 @@ class ScreenBody extends StatelessWidget {
     return Column(
       children: [
         Card(
+          elevation: 5,
+          margin: EdgeInsets.all(10),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 5),
             child: ListTile(
-              title: TextFormField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1)))),
+              title: Container(
+                padding: EdgeInsets.symmetric(vertical: 4),
+                child: TextFormField(
+                    onChanged: (value) {
+                      searchBloc.add(OnPress(text: searchController.text));
+                    },
+                    controller: searchController,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1)))),
+              ),
               trailing: IconButton(
                   onPressed: () {
                     searchBloc.add(OnPress(text: searchController.text));
@@ -75,9 +83,12 @@ class ScreenBody extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Container(
-                                padding: const EdgeInsetsDirectional.all(3),
+                                padding: const EdgeInsetsDirectional.all(5),
                                 margin: const EdgeInsetsDirectional.all(2),
                                 child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 5,
                                   clipBehavior: Clip.antiAlias,
                                   semanticContainer: false,
                                   child: Column(
@@ -86,7 +97,7 @@ class ScreenBody extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Container(
-                                        margin: const EdgeInsets.all(5),
+                                        margin: const EdgeInsets.all(10),
                                         child: Text(
                                             state.items[intx].name.toString(),
                                             style: const TextStyle(
@@ -96,7 +107,7 @@ class ScreenBody extends StatelessWidget {
                                       ),
                                       Container(
                                           margin:
-                                              const EdgeInsets.only(left: 5),
+                                              const EdgeInsets.only(left: 10),
                                           child: Text(
                                             state.items[intx].htmlUrl
                                                 .toString(),
@@ -109,7 +120,7 @@ class ScreenBody extends StatelessWidget {
                                                   .isEmpty
                                           ? const Text('')
                                           : Container(
-                                              margin: const EdgeInsets.all(5),
+                                              margin: const EdgeInsets.all(10),
                                               child: Text(state
                                                   .items[intx].description
                                                   .toString()),
@@ -119,27 +130,14 @@ class ScreenBody extends StatelessWidget {
                                                   .isEmpty
                                           ? const Text('')
                                           : Container(
-                                              margin: const EdgeInsets.all(5),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
                                               child: Chip(
                                                   label: Text(state
                                                       .items[intx].visibility
                                                       .toString())),
                                             ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                              margin: const EdgeInsets.all(5),
-                                              child: const Icon(
-                                                  Icons.account_tree_sharp)),
-                                          const Divider(
-                                            height: 1,
-                                          ),
-                                        ],
-                                      )
                                     ],
                                   ),
                                 ),
@@ -154,6 +152,10 @@ class ScreenBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Icon(
+                      Icons.info,
+                      size: 40,
+                    ),
                     Text(
                       state.error,
                       textAlign: TextAlign.center,

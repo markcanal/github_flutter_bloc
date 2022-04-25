@@ -16,6 +16,7 @@ class UserRepositoryBloc
   final GithubRepositorySearch githubRepositorySearch;
 
   void _onPressed(OnPress event, Emitter<UserRepositoryState> emit) async {
+    
     final searchText = event.text;
 
     if (searchText.isEmpty) return emit(UserRepositoryInitial());
@@ -23,7 +24,7 @@ class UserRepositoryBloc
     emit(UserRepositoryIsOnload());
 
     try {
-      final results = await githubRepositorySearch.getSearch(searchText);
+      final results = await githubRepositorySearch.getRepositoryOf(searchText);
 
       emit(UserRepositoryIsComplete(results));
     } catch (e) {

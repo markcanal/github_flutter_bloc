@@ -24,22 +24,22 @@ class GitHubApiService {
     }
   }
 
-  // Future listGithubUser({String? uName, String? dataLink}) async {
-  //   uName = uName == null ? '' : uName = '/$uName';
-  //   dataLink = dataLink == null ? '' : dataLink = '/$dataLink';
+  Future listGithubUser({String? uName, String? dataLink}) async {
+    uName = uName == null ? '' : uName = '/$uName';
+    dataLink = dataLink == null ? '' : dataLink = '/$dataLink';
 
-  //   var jsonResponse;
-  //   var url = Uri.parse('$baseApi/users/$uName$dataLink');
+    var jsonResponse;
+    var url = Uri.parse('$baseApi/users/$uName$dataLink');
 
-  //   final response = await http.get(url);
-  //   final result = json.decode(response.body);
+    final response = await http.get(url);
+    final result = json.decode(response.body);
 
-  //   if (response.statusCode == 200) {
-  //     // return jsonResponse = convert.jsonDecode(response.body) as List;
-  //     return GitHubRepositoriesModel.fromJson(result);
-  //   } else {
-  //     // return jsonResponse = response.statusCode;
-  //     throw SearchResultError.fromJson(result);
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      // return jsonResponse = convert.jsonDecode(response.body) as List;
+      return GitHubRepositoriesModel.fromJson(result);
+    } else {
+      // return jsonResponse = response.statusCode;
+      throw SearchResultError.fromJson(result);
+    }
+  }
 }
