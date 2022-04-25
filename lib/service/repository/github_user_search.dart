@@ -6,7 +6,7 @@ class GithubRepositorySearch {
 
   final GitHubApiService gitHubApiService;
 
-  Future<List<GitHubRepositoriesModel>> getSearch(String str) async {
+  Future<List<GitHubRepositoriesModel>> getRepositoryOf(String str) async {
     final result = gitHubApiService.findUserRepositories(str);
     return result;
   }
