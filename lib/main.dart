@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/config/themes.dart';
+import 'package:github_flutter_bloc/modules/bloc/user_repository/user_repository_bloc.dart';
 import 'package:github_flutter_bloc/modules/screen/home_screen.dart';
 import 'package:github_flutter_bloc/modules/screen/repository_screen.dart';
 import 'package:github_flutter_bloc/modules/screen/splash_screen.dart';
@@ -21,17 +23,25 @@ class MyApp extends StatelessWidget {
   final GithubRepositorySearch githubRepositorySearch;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Github Bloc',
-      theme: themeBlue,
-      home: const SplashScreen(),
-      // routes: {
-      //   '/': (context) => const HomeScreen(),
-      //   '/repository': (context) =>
-      //       RepositoryScreen(githubRepositorySearch: githubRepositorySearch),
-      //   '/user': (context) => const UserScreen()
-      // },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserRepositoryBloc(
+              githubRepositorySearch: githubRepositorySearch),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Github Bloc',
+        theme: themeBlue,
+        home: HomeScreen(),
+        // routes: {
+        //   '/': (context) => const HomeScreen(),
+        //   '/repository': (context) =>
+        //       RepositoryScreen(githubRepositorySearch: githubRepositorySearch),
+        //   '/user': (context) => const UserScreen()
+        // },
+      ),
     );
   }
 }
