@@ -15,13 +15,9 @@ class RepositoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          UserRepositoryBloc(githubRepositorySearch: githubRepositorySearch),
-      child: Scaffold(
-        appBar: AppBar(title: Text('Repositories')),
-        body: ScreenBody(searchController: searchController),
-      ),
+    return Scaffold(
+      // appBar: AppBar(title: Text('Repositories')),
+      body: ScreenBody(searchController: searchController),
     );
   }
 }
@@ -36,34 +32,9 @@ class ScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchBloc = BlocProvider.of<UserRepositoryBloc>(context);
+    // final searchBloc = BlocProvider.of<UserRepositoryBloc>(context);
     return Column(
       children: [
-        Card(
-          elevation: 5,
-          margin: EdgeInsets.all(10),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: ListTile(
-              title: Container(
-                padding: EdgeInsets.symmetric(vertical: 4),
-                child: TextFormField(
-                    onChanged: (value) {
-                      searchBloc.add(OnPress(text: searchController.text));
-                    },
-                    controller: searchController,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1)))),
-              ),
-              trailing: IconButton(
-                  onPressed: () {
-                    searchBloc.add(OnPress(text: searchController.text));
-                  },
-                  icon: Icon(Icons.search)),
-            ),
-          ),
-        ),
         Expanded(
           child: BlocBuilder<UserRepositoryBloc, UserRepositoryState>(
             builder: (context, state) {
@@ -79,69 +50,100 @@ class ScreenBody extends StatelessWidget {
                         itemCount: state.items.length,
                         itemBuilder: (context, intx) {
                           return Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Container(
-                                padding: const EdgeInsetsDirectional.all(5),
-                                margin: const EdgeInsetsDirectional.all(2),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  elevation: 5,
-                                  clipBehavior: Clip.antiAlias,
-                                  semanticContainer: false,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        margin: const EdgeInsets.all(10),
-                                        child: Text(
-                                            state.items[intx].name.toString(),
-                                            style: const TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold)),
+                              Card(
+                                elevation: 5,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: Container(
+                                          padding: EdgeInsets.all(10),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 5,
+                                                    vertical: 10),
+                                                child: CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      state.items[intx].owner
+                                                          .avatarUrl),
+                                                ),
+                                              ),
+                                              Text(
+                                                state.items[intx].owner.login,
+                                                style: TextStyle(
+                                                    color: Colors.blue,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                              Text(
+                                                state.items[intx].owner.htmlUrl,
+                                                style: TextStyle(fontSize: 11),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            state.items[intx].htmlUrl
-                                                .toString(),
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 11),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                          padding: EdgeInsets.all(10),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Text(
+                                                state.items[intx].name,
+                                                style: TextStyle(
+                                                    color: Colors.blue,
+                                                    fontSize: 16),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              Text(state.items[intx].fullName,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                  textAlign: TextAlign.center),
+                                              Text(state.items[intx].htmlUrl,
+                                                  style:
+                                                      TextStyle(fontSize: 11),
+                                                  textAlign: TextAlign.center),
+                                              state.items[intx].description ==
+                                                      null
+                                                  ? Container()
+                                                  : Column(
+                                                      children: [
+                                                        Divider(),
+                                                        Text(
+                                                            '** Project Description **',
+                                                            style: TextStyle(
+                                                                fontSize: 11),
+                                                            textAlign: TextAlign
+                                                                .center),
+                                                        Divider(),
+                                                        Text(
+                                                            state.items[intx]
+                                                                .description,
+                                                            style: TextStyle(
+                                                                fontSize: 11),
+                                                            textAlign: TextAlign
+                                                                .justify),
+                                                      ],
+                                                    )
+                                            ],
                                           )),
-                                      state.items[intx].description == null ||
-                                              state.items[intx].description!
-                                                  .isEmpty
-                                          ? const Text('')
-                                          : Container(
-                                              margin: const EdgeInsets.all(10),
-                                              child: Text(state
-                                                  .items[intx].description
-                                                  .toString()),
-                                            ),
-                                      state.items[intx].visibility == null ||
-                                              state.items[intx].visibility
-                                                  .isEmpty
-                                          ? const Text('')
-                                          : Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Chip(
-                                                  label: Text(state
-                                                      .items[intx].visibility
-                                                      .toString())),
-                                            ),
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
-                              ),
+                              )
                             ],
                           );
                         });
@@ -163,7 +165,20 @@ class ScreenBody extends StatelessWidget {
                   ],
                 );
               }
-              return Icon(Icons.search);
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Center(
+                      child: Icon(
+                    Icons.search,
+                    size: 30,
+                  )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Search User'),
+                ],
+              );
             },
           ),
         )
