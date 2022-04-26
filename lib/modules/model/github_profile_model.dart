@@ -4,11 +4,12 @@
 
 import 'dart:convert';
 
-GitHubProfileModel gitHubProfileModelFromJson(String str) =>
-    GitHubProfileModel.fromJson(json.decode(str));
+List<GitHubProfileModel> gitHubProfileModelFromJson(String str) =>
+    List<GitHubProfileModel>.from(
+        json.decode(str).map((x) => GitHubProfileModel.fromJson(x)));
 
-String gitHubProfileModelToJson(GitHubProfileModel data) =>
-    json.encode(data.toJson());
+String gitHubProfileModelToJson(List<GitHubProfileModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class GitHubProfileModel {
   GitHubProfileModel({
@@ -25,17 +26,17 @@ class GitHubProfileModel {
     required this.following,
   });
 
-  final String login;
-  final String avatarUrl;
-  final String htmlUrl;
-  final String name;
-  final String company;
-  final String blog;
-  final String location;
-  final int publicRepos;
-  final int publicGists;
-  final int followers;
-  final int following;
+  String login;
+  String avatarUrl;
+  String htmlUrl;
+  String name;
+  String company;
+  String blog;
+  String location;
+  int publicRepos;
+  int publicGists;
+  int followers;
+  int following;
 
   factory GitHubProfileModel.fromJson(Map<String, dynamic> json) =>
       GitHubProfileModel(

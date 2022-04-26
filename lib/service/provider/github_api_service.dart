@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:github_flutter_bloc/modules/model/github_profile_model.dart';
 import 'package:github_flutter_bloc/modules/model/github_repositories_model.dart';
 import 'package:github_flutter_bloc/modules/model/search_result_error.dart';
 
@@ -24,21 +25,20 @@ class GitHubApiService {
     }
   }
 
-  Future listGithubUser({String? uName, String? dataLink}) async {
+  Future<List<GitHubProfileModel>> listGithubUser(
+      {String? uName, String? dataLink}) async {
     uName = uName == null ? '' : uName = '/$uName';
     dataLink = dataLink == null ? '' : dataLink = '/$dataLink';
 
-    var jsonResponse;
     var url = Uri.parse('$baseApi/users/$uName$dataLink');
 
     final response = await http.get(url);
     final result = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      // return jsonResponse = convert.jsonDecode(response.body) as List;
-      return GitHubRepositoriesModel.fromJson(result);
+      List<GitHubProfileModel> _lst = gitHubProfileModelFromJson(response.body);
+      return _lst;
     } else {
-      // return jsonResponse = response.statusCode;
       throw SearchResultError.fromJson(result);
     }
   }

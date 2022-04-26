@@ -74,15 +74,19 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             Expanded(
-                child: TabBarView(children: [
-              RepositoryScreen(githubRepositorySearch: githubRepositorySearch),
-              Container(
-                color: Colors.yellow,
+              child: TabBarView(
+                children: [
+                  RepositoryScreen(
+                      githubRepositorySearch: githubRepositorySearch),
+                  Container(
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    color: Colors.pink,
+                  )
+                ],
               ),
-              Container(
-                color: Colors.pink,
-              )
-            ]))
+            ),
           ],
         ),
       ),
