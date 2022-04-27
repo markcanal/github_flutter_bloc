@@ -25,8 +25,8 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       emit(UserProfileInLoadAll(result));
     } catch (e) {
       emit(e is SearchResultError
-          ? UserProfileLoadAllError(error: e.message)
-          : const UserProfileLoadAllError(error: 'Something Went wrong'));
+          ? UserProfileLoadAllError(e.message)
+          : const UserProfileLoadAllError('Something Went wrong'));
     }
   }
 
@@ -35,12 +35,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
 
     try {
       final result = await githubRepositorySearch.getUserList(name: event.name);
-      emit(UserProfileInSearchFind(result));
+      emit(UserProfileInLoadAll(result));
     } catch (e) {
       emit(
         e is SearchResultError
-            ? UserProfileInSearcError(error: e.message)
-            : const UserProfileInSearcError(error: 'Something went wrong!'),
+            ? UserProfileLoadAllError(e.message)
+            : const UserProfileLoadAllError('Something went wrong!'),
       );
     }
   }

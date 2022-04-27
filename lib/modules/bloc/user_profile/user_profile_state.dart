@@ -19,7 +19,7 @@ class UserProfileInLoadAll extends UserProfileState {
 }
 
 class UserProfileLoadAllError extends UserProfileState {
-  const UserProfileLoadAllError({required this.error});
+  const UserProfileLoadAllError(this.error);
   final String error;
 
   @override
@@ -28,16 +28,16 @@ class UserProfileLoadAllError extends UserProfileState {
 
 class UserProfileInOnSearch extends UserProfileState {}
 
-class UserProfileInSearchFind extends UserProfileState {
-  const UserProfileInSearchFind(this.items);
-  final List<GitHubProfileModel> items;
-  @override
-  List<Object> get props => [items];
-}
+// class UserProfileInSearchFind extends UserProfileState {
+//   const UserProfileInSearchFind(this.items);
+//   final List<GitHubProfileModel> items;
+//   @override
+//   List<Object> get props => [items];
+// }
 
-class UserProfileInSearcError extends UserProfileState {
-  const UserProfileInSearcError({required this.error});
-  final String error;
-  @override
-  List<Object> get props => [error];
-}
+// class UserProfileInSearcError extends UserProfileState {
+//   const UserProfileInSearcError(this.error);
+//   final String error;
+//   @override
+//   List<Object> get props => [error];
+// }
