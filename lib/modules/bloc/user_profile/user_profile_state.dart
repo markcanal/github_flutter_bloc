@@ -11,10 +11,19 @@ class UserProfileInitial extends UserProfileState {}
 
 class UserProfileInLoadAll extends UserProfileState {
   const UserProfileInLoadAll(this.items);
+
   final List<GitHubProfileModel> items;
 
   @override
   List<Object> get props => [items];
+}
+
+class UserProfileLoadAllError extends UserProfileState {
+  const UserProfileLoadAllError({required this.error});
+  final String error;
+
+  @override
+  List<Object> get props => [error];
 }
 
 class UserProfileInOnSearch extends UserProfileState {}
