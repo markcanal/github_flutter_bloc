@@ -6,3 +6,5 @@ abstract class SplashScreenEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class NavigateToHomeScreen extends SplashScreenEvent {}

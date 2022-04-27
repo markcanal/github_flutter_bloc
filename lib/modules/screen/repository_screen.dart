@@ -50,49 +50,42 @@ class ScreenBody extends StatelessWidget {
                         itemCount: state.items.length,
                         itemBuilder: (context, intx) {
                           return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Card(
                                 elevation: 5,
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(2),
-                                        child: Container(
-                                          padding: EdgeInsets.all(10),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 5,
-                                                    vertical: 10),
-                                                child: CircleAvatar(
-                                                  backgroundImage: NetworkImage(
-                                                      state.items[intx].owner
-                                                          .avatarUrl),
-                                                ),
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(40),
+                                          color:
+                                              Colors.blueGrey.withOpacity(0.3),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 5, vertical: 10),
+                                              child: CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                    state.items[intx].owner
+                                                        .avatarUrl),
                                               ),
-                                              Text(
-                                                state.items[intx].owner.login,
-                                                style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                              ),
-                                              Text(
-                                                state.items[intx].owner.htmlUrl,
-                                                style: TextStyle(fontSize: 11),
-                                              )
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
                                     Expanded(
+                                      flex: 4,
                                       child: Container(
                                           padding: EdgeInsets.all(10),
                                           child: Column(
@@ -106,29 +99,42 @@ class ScreenBody extends StatelessWidget {
                                                 style: TextStyle(
                                                     color: Colors.blue,
                                                     fontSize: 16),
-                                                textAlign: TextAlign.center,
+                                                textAlign: TextAlign.left,
                                               ),
                                               Text(state.items[intx].fullName,
                                                   style:
                                                       TextStyle(fontSize: 12),
-                                                  textAlign: TextAlign.center),
-                                              Text(state.items[intx].htmlUrl,
-                                                  style:
-                                                      TextStyle(fontSize: 11),
-                                                  textAlign: TextAlign.center),
+                                                  textAlign: TextAlign.left),
+                                              TextButton(
+                                                style: ButtonStyle(
+                                                    alignment:
+                                                        Alignment.centerLeft),
+                                                onPressed: () {},
+                                                child: Text(
+                                                  state.items[intx].htmlUrl,
+                                                  style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Colors.blue),
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                              ),
                                               state.items[intx].description ==
                                                       null
                                                   ? Container()
                                                   : Column(
                                                       children: [
-                                                        Divider(),
+                                                        Divider(
+                                                          thickness: 1,
+                                                        ),
                                                         Text(
                                                             '** Project Description **',
                                                             style: TextStyle(
                                                                 fontSize: 11),
-                                                            textAlign: TextAlign
-                                                                .center),
-                                                        Divider(),
+                                                            textAlign:
+                                                                TextAlign.left),
+                                                        Divider(
+                                                          thickness: 1,
+                                                        ),
                                                         Text(
                                                             state.items[intx]
                                                                 .description,
