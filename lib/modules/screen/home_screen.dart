@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_repository/user_repository_bloc.dart';
 import 'package:github_flutter_bloc/modules/screen/repository_screen.dart';
+import 'package:github_flutter_bloc/modules/screen/user_screen.dart';
 import 'package:github_flutter_bloc/service/provider/github_api_service.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
 
@@ -78,9 +79,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   RepositoryScreen(
                       githubRepositorySearch: githubRepositorySearch),
-                  Container(
-                    color: Colors.yellow,
-                  ),
+                  const UserScreen(),
                   Container(
                     color: Colors.pink,
                   )

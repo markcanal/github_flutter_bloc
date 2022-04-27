@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_repository/user_repository_bloc.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
 import 'package:github_flutter_bloc/ui/load_page_effect.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RepositoryScreen extends StatelessWidget {
   RepositoryScreen({Key? key, required this.githubRepositorySearch})
@@ -109,7 +110,11 @@ class ScreenBody extends StatelessWidget {
                                                 style: ButtonStyle(
                                                     alignment:
                                                         Alignment.centerLeft),
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Uri url = Uri.parse(state
+                                                      .items[intx].htmlUrl);
+                                                  _launchUrl(url);
+                                                },
                                                 child: Text(
                                                   state.items[intx].htmlUrl,
                                                   style: TextStyle(
@@ -122,6 +127,9 @@ class ScreenBody extends StatelessWidget {
                                                       null
                                                   ? Container()
                                                   : Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Divider(
                                                           thickness: 1,
@@ -130,8 +138,8 @@ class ScreenBody extends StatelessWidget {
                                                             '** Project Description **',
                                                             style: TextStyle(
                                                                 fontSize: 11),
-                                                            textAlign:
-                                                                TextAlign.left),
+                                                            textAlign: TextAlign
+                                                                .center),
                                                         Divider(
                                                           thickness: 1,
                                                         ),
@@ -142,6 +150,9 @@ class ScreenBody extends StatelessWidget {
                                                                 fontSize: 11),
                                                             textAlign: TextAlign
                                                                 .justify),
+                                                        Divider(
+                                                          thickness: 1,
+                                                        ),
                                                       ],
                                                     )
                                             ],
@@ -215,4 +226,8 @@ class NoResults extends StatelessWidget {
       ],
     );
   }
+}
+
+void _launchUrl(Uri _url) async {
+  if (!await launchUrl(_url)) throw 'Could not launch $_url';
 }

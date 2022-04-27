@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/config/themes.dart';
 import 'package:github_flutter_bloc/modules/bloc/splash_screen/splash_screen_bloc.dart';
+import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_repository/user_repository_bloc.dart';
 import 'package:github_flutter_bloc/modules/screen/home_screen.dart';
 import 'package:github_flutter_bloc/modules/screen/repository_screen.dart';
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
               githubRepositorySearch: githubRepositorySearch),
         ),
         BlocProvider(create: (context) => SplashScreenBloc()),
+        BlocProvider(
+            create: (context) => UserProfileBloc(githubRepositorySearch)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
