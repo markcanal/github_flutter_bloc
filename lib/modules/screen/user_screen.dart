@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.dart';
 import 'package:github_flutter_bloc/ui/load_page_effect.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class UserScreen extends StatelessWidget {
               if (state is UserProfileInitial ||
                   state is UserProfileInOnSearch) {
                 return LoadPageEffect()
-                    .shimmerMe(LoadPageEffect().userListSkeleton());
+                    .shimmerMe(LoadPageEffect().userFollowSkeleton());
               }
               if (state is UserProfileInLoadAll) {
                 return state.items.isEmpty
@@ -59,7 +60,15 @@ class UserScreen extends StatelessWidget {
                                                     fontSize: 14),
                                               ),
                                             ),
-                                            Text(state.items[intx].htmlUrl)
+                                            TextButton(
+                                              child: Text(
+                                                  state.items[intx].htmlUrl),
+                                              onPressed: () {
+                                                Uri _url = Uri.parse(
+                                                    state.items[intx].htmlUrl);
+                                                _launchUrl(_url);
+                                              },
+                                            )
                                           ],
                                         )
                                       ],
@@ -139,4 +148,8 @@ class NoResults extends StatelessWidget {
       ],
     );
   }
+}
+
+void _launchUrl(Uri _url) async {
+  if (!await launchUrl(_url)) throw 'Could not launch $_url';
 }
