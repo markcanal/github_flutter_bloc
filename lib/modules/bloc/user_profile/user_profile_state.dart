@@ -12,7 +12,7 @@ class UserProfileInitial extends UserProfileState {}
 class UserProfileInLoadAll extends UserProfileState {
   const UserProfileInLoadAll(this.items);
 
-  final List<GitHubProfileModel> items;
+  final List<GitHubUserModel> items;
 
   @override
   List<Object> get props => [items];

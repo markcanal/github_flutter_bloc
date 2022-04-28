@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:github_flutter_bloc/modules/model/github_profile_model.dart';
+import 'package:github_flutter_bloc/modules/model/github_user_model.dart';
 import 'package:github_flutter_bloc/modules/model/search_result_error.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
 

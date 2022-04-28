@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:github_flutter_bloc/modules/model/github_user_model.dart';
+
 List<GitHubRepositoriesModel> gitHubRepositoriesModelFromJson(String str) =>
     List<GitHubRepositoriesModel>.from(
         json.decode(str).map((x) => GitHubRepositoriesModel.fromJson(x)));
@@ -23,7 +25,7 @@ class GitHubRepositoriesModel {
 
   final String name;
   final String fullName;
-  final Owner owner;
+  final GitHubUserModel owner;
   final String htmlUrl;
   final dynamic description;
   final String visibility;
@@ -32,7 +34,7 @@ class GitHubRepositoriesModel {
       GitHubRepositoriesModel(
         name: json["name"],
         fullName: json["full_name"],
-        owner: Owner.fromJson(json["owner"]),
+        owner: GitHubUserModel.fromJson(json["owner"]),
         htmlUrl: json["html_url"],
         description: json["description"],
         visibility: json["visibility"],
@@ -45,29 +47,5 @@ class GitHubRepositoriesModel {
         "html_url": htmlUrl,
         "description": description,
         "visibility": visibility,
-      };
-}
-
-class Owner {
-  Owner({
-    required this.login,
-    required this.avatarUrl,
-    required this.htmlUrl,
-  });
-
-  final String login;
-  final String avatarUrl;
-  final String htmlUrl;
-
-  factory Owner.fromJson(Map<String, dynamic> json) => Owner(
-        login: json["login"],
-        avatarUrl: json["avatar_url"],
-        htmlUrl: json["html_url"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "login": login,
-        "avatar_url": avatarUrl,
-        "html_url": htmlUrl,
       };
 }
