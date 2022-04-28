@@ -100,7 +100,7 @@ class LoadPageEffect {
   Widget userFollowSkeleton() {
     return Shimmer.fromColors(
         baseColor: Colors.blueGrey,
-        highlightColor: Colors.grey,
+        highlightColor: Colors.blue,
         enabled: true,
         child: ListView.builder(
           itemBuilder: (_, __) => Container(
@@ -112,7 +112,7 @@ class LoadPageEffect {
                 Container(
                   margin: const EdgeInsets.only(right: 14.0),
                   child: const CircleAvatar(
-                      backgroundColor: Colors.white, radius: 30),
+                      backgroundColor: Colors.white, radius: 50),
                 ),
                 Expanded(
                     child: Column(
