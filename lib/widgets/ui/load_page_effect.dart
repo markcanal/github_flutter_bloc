@@ -112,7 +112,7 @@ class LoadPageEffect {
                 Container(
                   margin: const EdgeInsets.only(right: 14.0),
                   child: const CircleAvatar(
-                      backgroundColor: Colors.white, radius: 50),
+                      backgroundColor: Colors.white, radius: 40),
                 ),
                 Expanded(
                     child: Column(

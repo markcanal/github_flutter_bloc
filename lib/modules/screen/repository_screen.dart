@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_repository/user_repository_bloc.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
-import 'package:github_flutter_bloc/ui/load_page_effect.dart';
+import 'package:github_flutter_bloc/widgets/ui/load_page_effect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RepositoryScreen extends StatelessWidget {

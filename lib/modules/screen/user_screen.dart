@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.dart';
-import 'package:github_flutter_bloc/ui/load_page_effect.dart';
+import 'package:github_flutter_bloc/widgets/ui/load_page_effect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UserScreen extends StatelessWidget {
