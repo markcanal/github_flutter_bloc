@@ -16,7 +16,6 @@ class UserRepositoryBloc
   final GithubRepositorySearch githubRepositorySearch;
 
   void _onPressed(OnPress event, Emitter<UserRepositoryState> emit) async {
-    
     final searchText = event.text;
 
     if (searchText.isEmpty) return emit(UserRepositoryInitial());
@@ -34,5 +33,10 @@ class UserRepositoryBloc
             : const UserRepositoryIsError(error: 'Something Went wrong'),
       );
     }
+  }
+
+  @override
+  Future<void> close() {
+    return super.close();
   }
 }
