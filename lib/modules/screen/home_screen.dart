@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       GithubRepositorySearch(gitHubApiService: GitHubApiService());
   @override
   Widget build(BuildContext context) {
-    final searchBloc = BlocProvider.of<UserRepositoryBloc>(context);
+    // final searchBloc = BlocProvider.of<UserRepositoryBloc>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -37,7 +37,10 @@ class HomeScreen extends StatelessWidget {
                               borderSide: BorderSide(width: 1)))),
                   trailing: IconButton(
                       onPressed: () {
-                        searchBloc.add(OnPress(text: searchController.text));
+                        // searchBloc.add(OnPress(text: searchController.text));
+                        context
+                            .read<UserRepositoryBloc>()
+                            .add(OnPress(text: searchController.text));
                       },
                       icon: const Icon(Icons.search)),
                 ),
