@@ -171,13 +171,20 @@ class ScreenBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.info,
+                    const Icon(
+                      Icons.error,
                       size: 40,
+                      color: Colors.redAccent,
                     ),
-                    Text(
-                      state.error,
-                      textAlign: TextAlign.center,
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        state.error,
+                        textAlign: TextAlign.justify,
+                      ),
                     ),
                   ],
                 );
