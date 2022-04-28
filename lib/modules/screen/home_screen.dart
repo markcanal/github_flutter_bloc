@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchBloc = BlocProvider.of<UserRepositoryBloc>(context);
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           elevation: 5,
@@ -64,14 +64,14 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Tab(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Profile'),
-                    ],
-                  ),
-                )
+                // Tab(
+                //   child: Column(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: const [
+                //       Text('Profile'),
+                //     ],
+                //   ),
+                // )
               ],
             ),
             Expanded(
@@ -80,9 +80,9 @@ class HomeScreen extends StatelessWidget {
                   RepositoryScreen(
                       githubRepositorySearch: githubRepositorySearch),
                   const UserScreen(),
-                  Container(
-                    color: Colors.pink,
-                  )
+                  // Container(
+                  //   color: Colors.pink,
+                  // )
                 ],
               ),
             ),
