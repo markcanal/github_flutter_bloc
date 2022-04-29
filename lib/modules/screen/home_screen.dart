@@ -15,99 +15,131 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final TextEditingController searchController = TextEditingController();
-
+  TabController? tabControl;
   final githubRepositorySearch =
       GithubRepositorySearch(gitHubApiService: GitHubApiService());
+
+  List tabList = [
+    const Tab(child: Text("Repositories")),
+    const Tab(child: Text("User")),
+  ];
+
+  List tabView = [
+    RepositoryScreen(
+        githubRepositorySearch:
+            GithubRepositorySearch(gitHubApiService: GitHubApiService())),
+    const UserScreen(),
+  ];
+
+  int selectedIndex = 0;
 
   @override
   void initState() {
     context.read<UserProfileBloc>().add(const OnLoad());
-
+    tabControl = TabController(length: tabList.length, vsync: this);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabControl!.dispose();
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // final searchBloc = BlocProvider.of<UserRepositoryBloc>(context);
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 5,
-          title: const Text('Flutter GitHub'),
-        ),
-        body: Column(
-          children: [
-            Card(
-              elevation: 5,
-              margin: const EdgeInsets.all(5),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: ListTile(
-                  title: TextFormField(
-                      onChanged: (value) {},
-                      controller: searchController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(width: 1)))),
-                  trailing: IconButton(
-                      onPressed: () {
-                        // searchBloc.add(OnPress(text: searchController.text));
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 5,
+        title: const Text('Flutter GitHub'),
+      ),
+      body: Column(
+        children: [
+          Card(
+            elevation: 5,
+            margin: const EdgeInsets.all(5),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: ListTile(
+                title: TextFormField(
+                    onChanged: (value) {},
+                    controller: searchController,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1)))),
+                trailing: IconButton(
+                    onPressed: () {
+                      // searchBloc.add(OnPress(text: searchController.text));
+                      if (selectedIndex == 1) {
+                        context
+                            .read<UserProfileBloc>()
+                            .add(OnSearch(name: searchController.text));
+                      } else {
                         context
                             .read<UserRepositoryBloc>()
                             .add(OnPress(text: searchController.text));
-                      },
-                      icon: const Icon(Icons.search)),
-                ),
+                      }
+                    },
+                    icon: const Icon(Icons.search)),
               ),
             ),
-            TabBar(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              tabs: [
-                Tab(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Repositories',
-                      )
-                    ],
-                  ),
+          ),
+          TabBar(
+            controller: tabControl,
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            onTap: (value) {
+              setState(() {
+                selectedIndex = value;
+                searchController.text = '';
+              });
+            },
+            tabs: [
+              Tab(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Repositories',
+                    )
+                  ],
                 ),
-                Tab(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Users'),
-                    ],
-                  ),
+              ),
+              Tab(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('Users'),
+                  ],
                 ),
-                // Tab(
-                //   child: Column(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: const [
-                //       Text('Profile'),
-                //     ],
-                //   ),
+              ),
+              //   // Tab(
+              //   //   child: Column(
+              //   //     mainAxisAlignment: MainAxisAlignment.center,
+              //   //     children: const [
+              //   //       Text('Profile'),
+              //   //     ],
+              //   //   ),
+              //   // )
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: tabControl,
+              children: [
+                RepositoryScreen(
+                    githubRepositorySearch: githubRepositorySearch),
+                const UserScreen(),
+                // Container(
+                //   color: Colors.pink,
                 // )
               ],
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  RepositoryScreen(
-                      githubRepositorySearch: githubRepositorySearch),
-                  const UserScreen(),
-                  // Container(
-                  //   color: Colors.pink,
-                  // )
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
