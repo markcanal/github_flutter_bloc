@@ -30,46 +30,72 @@ class UserScreen extends StatelessWidget {
                               Card(
                                 elevation: 5,
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  // mainAxisAlignment:
+                                  //     MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(10),
-                                          child: CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                state.items[intx].avatarUrl),
-                                            radius: 40,
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  state.items[intx].avatarUrl),
+                                              radius: 40,
+                                            ),
                                           ),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5),
-                                              child: Text(
-                                                state.items[intx].login,
-                                                style: const TextStyle(
-                                                    color: Colors.blue,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14),
-                                              ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Container(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 5),
+                                                  child: Text(
+                                                    state.items[intx].login,
+                                                    style: const TextStyle(
+                                                        color: Colors.blue,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14),
+                                                  ),
+                                                ),
+                                                Text(state.items[intx].htmlUrl)
+                                              ],
                                             ),
-                                            TextButton(
-                                              child: Text(
-                                                  state.items[intx].htmlUrl),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 30),
+                                            child: IconButton(
+                                              color: Colors.blueGrey,
+                                              focusColor: Colors.blue,
+                                              hoverColor: Colors.blue,
+                                              highlightColor: Colors.white,
                                               onPressed: () {
                                                 Uri _url = Uri.parse(
                                                     state.items[intx].htmlUrl);
                                                 _launchUrl(_url);
                                               },
-                                            )
-                                          ],
-                                        )
+                                              icon: const Icon(
+                                                Icons.travel_explore,
+                                                size: 40,
+                                              ),
+                                              tooltip:
+                                                  'Goto web profile of ${state.items[intx].login}',
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
