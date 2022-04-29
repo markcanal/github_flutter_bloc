@@ -23,9 +23,9 @@
         </intent>
     </queries>
    <application
-        android:label="github_flutter_bloc"
+        android:label="Github FLutter Bloc"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/sam">
         <activity
             android:name=".MainActivity"
             android:exported="true"

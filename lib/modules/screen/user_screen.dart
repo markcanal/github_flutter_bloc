@@ -114,6 +114,9 @@ class UserScreen extends StatelessWidget {
                   avatarUrl: state.items.avatarUrl.toString(),
                   location: state.items.location.toString(),
                   blogSite: state.items.blog.toString(),
+                  reposiroty: state.items.publicRepos.toString(),
+                  followers: state.items.followers.toString(),
+                  following: state.items.following.toString(),
                 );
               }
               if (state is UserProfileLoadAllError) {
