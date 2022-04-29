@@ -37,15 +37,16 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Github Bloc',
         theme: themeBlue,
-        home: BlocBuilder<SplashScreenBloc, SplashScreenState>(
-          builder: (context, state) {
-            if (state is SplashScreenInitial || state is SplashScreenLoading) {
-              return const SplashScreen();
-            } else {
-              return HomeScreen();
-            }
-          },
-        ),
+        home: const SplashScreen(),
+        // home: BlocBuilder<SplashScreenBloc, SplashScreenState>(
+        //   builder: (context, state) {
+        //     if (state is SplashScreenInitial || state is SplashScreenLoading) {
+        //       return const SplashScreen();
+        //     } else {
+        //       return HomeScreen();
+        //     }
+        //   },
+        // ),
       ),
     );
   }

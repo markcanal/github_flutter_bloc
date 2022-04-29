@@ -10,7 +10,7 @@ part 'user_profile_state.dart';
 
 class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   UserProfileBloc(this.githubRepositorySearch) : super(UserProfileInitial()) {
-    on<OnLoad>(_onLoad);
+    on<OnLoad>((event, emit) => _onLoad(event, emit));
     on<OnSearch>(_onSearch);
   }
 

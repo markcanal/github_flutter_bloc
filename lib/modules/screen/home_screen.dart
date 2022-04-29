@@ -6,11 +6,28 @@ import 'package:github_flutter_bloc/modules/screen/user_screen.dart';
 import 'package:github_flutter_bloc/service/provider/github_api_service.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+import '../bloc/user_profile/user_profile_bloc.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchController = TextEditingController();
+
   final githubRepositorySearch =
       GithubRepositorySearch(gitHubApiService: GitHubApiService());
+
+  @override
+  void initState() {
+    context.read<UserProfileBloc>().add(const OnLoad());
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // final searchBloc = BlocProvider.of<UserRepositoryBloc>(context);

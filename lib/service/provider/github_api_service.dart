@@ -27,11 +27,11 @@ class GitHubApiService {
   }
 
   Future<List<GitHubUserModel>> listGithubUser(
-      {String? uName, String? dataLink}) async {
-    uName = uName == null ? '' : uName = '/$uName';
-    dataLink = dataLink == null ? '' : dataLink = '/$dataLink';
+      {String? userName, String? page}) async {
+    userName = userName == null ? '' : userName = '/$userName';
+    page = page == null ? '' : page = '/$page';
 
-    var url = Uri.parse('$baseApi/users$uName$dataLink');
+    var url = Uri.parse('$baseApi/users$userName$page');
 
     final response = await http.get(url);
     final result = json.decode(response.body);

@@ -9,7 +9,6 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<UserProfileBloc>().add(const OnLoad());
     return Column(
       children: [
         Expanded(

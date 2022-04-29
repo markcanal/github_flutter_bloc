@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/splash_screen/splash_screen_bloc.dart';
+import 'package:github_flutter_bloc/modules/screen/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -40,28 +41,36 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: AnimatedBuilder(
-      animation: animateControl,
-      builder: (BuildContext _, child) {
-        return Transform.scale(
-          scale: animateControl.value,
-          child: child,
-        );
+    return BlocListener<SplashScreenBloc, SplashScreenState>(
+      listener: (context, state) {
+        if (state is SplashScreenLoaded) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => HomeScreen()));
+        }
       },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 4,
-            width: MediaQuery.of(context).size.width / 4,
-            child: const Image(
-                image: NetworkImage(
-                    'https://th.bing.com/th/id/R.c963626c145ea660ba7ceee666789c0a?rik=%2b8pQxk8WvGd0Fw&riu=http%3a%2f%2fpngimg.com%2fuploads%2fgithub%2fgithub_PNG28.png&ehk=SD294NKjXG3JppRn7fPyo6czUcyiLUWeIci5Y0RO%2fbk%3d&risl=&pid=ImgRaw&r=0')),
-          ),
-        ],
-      ),
-    ));
+      child: SafeArea(
+          child: AnimatedBuilder(
+        animation: animateControl,
+        builder: (BuildContext _, child) {
+          return Transform.scale(
+            scale: animateControl.value,
+            child: child,
+          );
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 4,
+              width: MediaQuery.of(context).size.width / 4,
+              child: const Image(
+                  image: NetworkImage(
+                      'https://th.bing.com/th/id/R.c963626c145ea660ba7ceee666789c0a?rik=%2b8pQxk8WvGd0Fw&riu=http%3a%2f%2fpngimg.com%2fuploads%2fgithub%2fgithub_PNG28.png&ehk=SD294NKjXG3JppRn7fPyo6czUcyiLUWeIci5Y0RO%2fbk%3d&risl=&pid=ImgRaw&r=0')),
+            ),
+          ],
+        ),
+      )),
+    );
   }
 
   void _dispatch(BuildContext context) {
