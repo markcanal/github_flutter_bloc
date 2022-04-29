@@ -26,12 +26,11 @@ class GitHubApiService {
     }
   }
 
-  Future<List<GitHubUserModel>> listGithubUser(
-      {String? userName, String? page}) async {
-    userName = userName == null ? '' : userName = '/$userName';
-    page = page == null ? '' : page = '/$page';
+  Future<List<GitHubUserModel>> listGithubUser() async {
+    // userName = userName == null ? '' : userName = '/$userName';
+    // page = page == null ? '' : page = '/$page';
 
-    var url = Uri.parse('$baseApi/users$userName$page');
+    var url = Uri.parse('$baseApi/users');
 
     final response = await http.get(url);
     final result = json.decode(response.body);
@@ -39,6 +38,25 @@ class GitHubApiService {
     if (response.statusCode == 200) {
       List<GitHubUserModel> _lst = gitHubUserModelFromJson(response.body);
       return _lst;
+    } else {
+      throw SearchResultError.fromJson(result);
+    }
+  }
+
+  Future<GitHubProfileModel> userProfile(
+      {String? userName, String? page}) async {
+    userName = userName == null ? '' : userName = '/$userName';
+    page = page == null ? '' : page = '/$page';
+
+    var url = Uri.parse('$baseApi/users$userName$page');
+    // print(url);
+    final response = await http.get(url);
+    final result = json.decode(response.body);
+    // print(response.body);
+    // print('##result $result');
+
+    if (response.statusCode == 200) {
+      return GitHubProfileModel.fromJson(result);
     } else {
       throw SearchResultError.fromJson(result);
     }

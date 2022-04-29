@@ -11,7 +11,7 @@ part 'user_profile_state.dart';
 class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   UserProfileBloc(this.githubRepositorySearch) : super(UserProfileInitial()) {
     on<OnLoad>((event, emit) => _onLoad(event, emit));
-    on<OnSearch>(_onSearch);
+    on<OnSearch>((event, emit) => _onSearch(event, emit));
   }
 
   final GithubRepositorySearch githubRepositorySearch;
@@ -30,11 +30,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   }
 
   void _onSearch(OnSearch event, Emitter<UserProfileState> emit) async {
-    emit(UserProfileInOnSearch());
+    emit(UserProfileOnSearch());
 
     try {
-      final result = await githubRepositorySearch.getUserList(name: event.name);
-      emit(UserProfileInLoadAll(result));
+      final result =
+          await githubRepositorySearch.getUserProfile(name: event.name);
+      emit(UserProfileSearchFind(result));
     } catch (e) {
       emit(
         e is SearchResultError

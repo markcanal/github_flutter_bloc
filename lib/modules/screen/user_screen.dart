@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.dart';
+import 'package:github_flutter_bloc/widgets/results/user_profile.dart';
 import 'package:github_flutter_bloc/widgets/ui/load_page_effect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,8 +15,7 @@ class UserScreen extends StatelessWidget {
         Expanded(
           child: BlocBuilder<UserProfileBloc, UserProfileState>(
             builder: (context, state) {
-              if (state is UserProfileInitial ||
-                  state is UserProfileInOnSearch) {
+              if (state is UserProfileInitial || state is UserProfileOnSearch) {
                 return LoadPageEffect()
                     .shimmerMe(LoadPageEffect().userFollowSkeleton());
               }
@@ -108,9 +108,17 @@ class UserScreen extends StatelessWidget {
                         },
                       );
               }
+              if (state is UserProfileSearchFind) {
+                return UserProfile(
+                  userName: state.items.name.toString(),
+                  avatarUrl: state.items.avatarUrl.toString(),
+                  location: state.items.location.toString(),
+                  blogSite: state.items.blog.toString(),
+                );
+              }
               if (state is UserProfileLoadAllError) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(

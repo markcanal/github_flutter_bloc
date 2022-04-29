@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:github_flutter_bloc/modules/model/github_profile_model.dart';
 import 'package:github_flutter_bloc/modules/model/github_repositories_model.dart';
 import 'package:github_flutter_bloc/modules/model/github_user_model.dart';
@@ -10,45 +10,21 @@ class GithubRepositorySearch {
   final GitHubApiService gitHubApiService;
 
   Future<List<GitHubRepositoriesModel>> getRepositoryOf(String str) async {
-    final result = gitHubApiService.findUserRepositories(str);
+    final result = await gitHubApiService.findUserRepositories(str);
     return result;
   }
 
   Future<List<GitHubUserModel>> getUserList(
       {String? name, String? link}) async {
-    final result = gitHubApiService.listGithubUser(userName: name, page: link);
+    final result = await gitHubApiService.listGithubUser();
     return result;
   }
 
-  List<Widget> createTabList() {
-    final result = <Widget>[
-      Tab(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              'Repositories',
-            )
-          ],
-        ),
-      ),
-      Tab(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text('Users'),
-          ],
-        ),
-      ),
-      Tab(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text('Profile'),
-          ],
-        ),
-      ),
-    ];
+  Future<GitHubProfileModel> getUserProfile(
+      {String? name, String? link}) async {
+    final result =
+        await gitHubApiService.userProfile(userName: name, page: link);
+    print('###Repository Search result for $name: $result');
     return result;
   }
 }

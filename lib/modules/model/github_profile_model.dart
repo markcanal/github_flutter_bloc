@@ -4,39 +4,40 @@
 
 import 'dart:convert';
 
-List<GitHubProfileModel> gitHubProfileModelFromJson(String str) =>
-    List<GitHubProfileModel>.from(
-        json.decode(str).map((x) => GitHubProfileModel.fromJson(x)));
+GitHubProfileModel gitHubProfileModelFromJson(String str) =>
+    GitHubProfileModel.fromJson(json.decode(str));
 
-String gitHubProfileModelToJson(List<GitHubProfileModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String gitHubProfileModelToJson(GitHubProfileModel data) =>
+    json.encode(data.toJson());
 
 class GitHubProfileModel {
   GitHubProfileModel({
-    required this.login,
-    required this.avatarUrl,
-    required this.htmlUrl,
-    required this.name,
-    required this.company,
-    required this.blog,
-    required this.location,
-    required this.publicRepos,
-    required this.publicGists,
-    required this.followers,
-    required this.following,
+    this.login,
+    this.avatarUrl,
+    this.htmlUrl,
+    this.name,
+    this.company,
+    this.blog,
+    this.location,
+    this.twitterUsername,
+    this.publicRepos,
+    this.publicGists,
+    this.followers,
+    this.following,
   });
 
-  String login;
-  String avatarUrl;
-  String htmlUrl;
-  String name;
-  String company;
-  String blog;
-  String location;
-  int publicRepos;
-  int publicGists;
-  int followers;
-  int following;
+  String? login;
+  String? avatarUrl;
+  String? htmlUrl;
+  String? name;
+  String? company;
+  String? blog;
+  String? location;
+  String? twitterUsername;
+  int? publicRepos;
+  int? publicGists;
+  int? followers;
+  int? following;
 
   factory GitHubProfileModel.fromJson(Map<String, dynamic> json) =>
       GitHubProfileModel(
@@ -47,6 +48,7 @@ class GitHubProfileModel {
         company: json["company"],
         blog: json["blog"],
         location: json["location"],
+        twitterUsername: json["twitter_username"],
         publicRepos: json["public_repos"],
         publicGists: json["public_gists"],
         followers: json["followers"],
@@ -61,6 +63,7 @@ class GitHubProfileModel {
         "company": company,
         "blog": blog,
         "location": location,
+        "twitter_username": twitterUsername,
         "public_repos": publicRepos,
         "public_gists": publicGists,
         "followers": followers,
