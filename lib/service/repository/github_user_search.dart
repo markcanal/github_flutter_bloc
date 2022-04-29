@@ -16,7 +16,7 @@ class GithubRepositorySearch {
 
   Future<List<GitHubUserModel>> getUserList(
       {String? name, String? link}) async {
-    final result = gitHubApiService.listGithubUser(uName: name, dataLink: link);
+    final result = gitHubApiService.listGithubUser(userName: name, page: link);
     return result;
   }
 

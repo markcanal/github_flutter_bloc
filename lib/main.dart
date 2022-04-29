@@ -4,7 +4,6 @@ import 'package:github_flutter_bloc/config/themes.dart';
 import 'package:github_flutter_bloc/modules/bloc/splash_screen/splash_screen_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_repository/user_repository_bloc.dart';
-import 'package:github_flutter_bloc/modules/screen/home_screen.dart';
 import 'package:github_flutter_bloc/modules/screen/splash_screen.dart';
 import 'package:github_flutter_bloc/service/provider/github_api_service.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
