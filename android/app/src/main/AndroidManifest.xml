@@ -24,7 +24,7 @@
     </queries>
    <application
         android:label="Github FLutter Bloc"
-        android:name="${applicationName}"
+        android:name="GitHub Flutter Bloc"
         android:icon="@mipmap/sam">
         <activity
             android:name=".MainActivity"
