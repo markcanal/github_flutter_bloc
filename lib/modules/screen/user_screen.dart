@@ -51,6 +51,8 @@ class UserScreen extends StatelessWidget {
                                         Expanded(
                                           flex: 3,
                                           child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
