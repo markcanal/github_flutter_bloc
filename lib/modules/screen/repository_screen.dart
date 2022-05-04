@@ -55,6 +55,7 @@ class ScreenBody extends StatelessWidget {
                             // crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Card(
+                                color: Colors.blueGrey,
                                 elevation: 5,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
