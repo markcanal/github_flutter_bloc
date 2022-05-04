@@ -1,6 +1,8 @@
 // import 'package:flutter/material.dart';
 import 'package:github_flutter_bloc/modules/model/github_profile_model.dart';
 import 'package:github_flutter_bloc/modules/model/github_repositories_model.dart';
+import 'package:github_flutter_bloc/modules/model/github_user_follower.dart';
+import 'package:github_flutter_bloc/modules/model/github_user_following.dart';
 import 'package:github_flutter_bloc/modules/model/github_user_model.dart';
 import 'package:github_flutter_bloc/service/provider/github_api_service.dart';
 
@@ -24,15 +26,20 @@ class GithubRepositorySearch {
       {String? name, String? link}) async {
     final result =
         await gitHubApiService.userProfile(userName: name, page: link);
-    print('###Repository Search result for $name: $result');
     return result;
   }
 
-  Future<GitHubProfileModel> getFollowResults(
+  Future<List<GitHubFollowingModel>> getFollowingResults(
       {String? name, String? link}) async {
     final result =
-        await gitHubApiService.userProfile(userName: name, page: link);
-    print('###Followers  result for $name: $result');
+        await gitHubApiService.userFollowing(userName: name, page: link);
+    return result;
+  }
+
+  Future<List<GitHubFollowerModel>> getFollowerResults(
+      {String? name, String? link}) async {
+    final result =
+        await gitHubApiService.userFollower(userName: name, page: link);
     return result;
   }
 }

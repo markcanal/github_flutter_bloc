@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_flutter_bloc/modules/bloc/user_follow/user_follow_bloc.dart';
+import 'package:github_flutter_bloc/modules/bloc/user_following/user_following_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.dart';
+import 'package:github_flutter_bloc/modules/bloc/user_repository/user_repository_bloc.dart';
 import 'package:github_flutter_bloc/widgets/results/user_profile.dart';
 import 'package:github_flutter_bloc/widgets/ui/load_page_effect.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -109,6 +112,7 @@ class UserScreen extends StatelessWidget {
                       );
               }
               if (state is UserProfileSearchFind) {
+                profileDetail(context, state.items.login.toString());
                 return UserProfile(
                   userName: state.items.name.toString(),
                   avatarUrl: state.items.avatarUrl.toString(),
@@ -119,6 +123,7 @@ class UserScreen extends StatelessWidget {
                   following: state.items.following.toString(),
                 );
               }
+
               if (state is UserProfileLoadAllError) {
                 return Column(
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -190,4 +195,10 @@ class NoResults extends StatelessWidget {
 
 void _launchUrl(Uri _url) async {
   if (!await launchUrl(_url)) throw 'Could not launch $_url';
+}
+
+void profileDetail(BuildContext context, String name) {
+  context.read<UserFollowingBloc>().add(LoadFollowing(name: name));
+  context.read<UserFollowBloc>().add(LoadFollower(name: name));
+  context.read<UserRepositoryBloc>().add(OnPress(text: name));
 }

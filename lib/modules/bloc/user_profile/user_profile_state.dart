@@ -36,10 +36,3 @@ class UserProfileSearchFind extends UserProfileState {
   @override
   List<Object> get props => [items];
 }
-
-// class UserProfileInSearcError extends UserProfileState {
-//   const UserProfileInSearcError(this.error);
-//   final String error;
-//   @override
-//   List<Object> get props => [error];
-// }

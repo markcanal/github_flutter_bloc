@@ -21,3 +21,27 @@ class OnSearch extends UserProfileEvent {
   @override
   String toString() => 'Search $name';
 }
+
+// class FollowingUser extends UserProfileEvent {
+//   final String name;
+
+//   const FollowingUser(this.name);
+
+//   @override
+//   List<Object> get props => [name];
+
+//   @override
+//   String toString() => 'Following $name';
+// }
+
+// class FollowerUser extends UserProfileEvent {
+//   final String name;
+
+//   const FollowerUser(this.name);
+
+//   @override
+//   List<Object> get props => [name];
+
+//   @override
+//   String toString() => 'Following $name';
+// }

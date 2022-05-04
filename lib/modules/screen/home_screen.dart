@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    context.read<UserProfileBloc>().add(const OnLoad());
+    // context.read<UserProfileBloc>().add(const OnLoad());
     tabControl = TabController(length: tabList.length, vsync: this);
     super.initState();
   }
@@ -81,9 +81,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           context
                               .read<UserProfileBloc>()
                               .add(OnSearch(name: searchController.text));
-                          context
-                              .read<UserRepositoryBloc>()
-                              .add(OnPress(text: searchController.text));
                         }
                       } else {
                         context
@@ -108,9 +105,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     .read<UserRepositoryBloc>()
                     .add(OnPress(text: searchController.text));
               } else if (selectedIndex == 1) {
-                context
-                    .read<UserProfileBloc>()
-                    .add(OnSearch(name: searchController.text));
+                context.read<UserProfileBloc>().add(const OnLoad());
               }
             },
             tabs: [

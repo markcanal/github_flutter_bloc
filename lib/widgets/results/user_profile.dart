@@ -4,6 +4,8 @@ import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.
 import 'package:github_flutter_bloc/modules/screen/repository_screen.dart';
 import 'package:github_flutter_bloc/service/provider/github_api_service.dart';
 import 'package:github_flutter_bloc/service/repository/github_user_search.dart';
+import 'package:github_flutter_bloc/widgets/results/user_followers.dart';
+import 'package:github_flutter_bloc/widgets/results/user_following.dart';
 
 class UserProfile extends StatelessWidget {
   final String avatarUrl;
@@ -196,12 +198,8 @@ class UserProfile extends StatelessWidget {
                   children: [
                     RepositoryScreen(
                         githubRepositorySearch: githubRepositorySearch),
-                    Container(
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      color: Colors.yellow,
-                    ),
+                    const UserFollowersView(),
+                    const UserFollowingView(),
                   ],
                 ),
               ),
