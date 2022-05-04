@@ -16,21 +16,16 @@ class UserFollowBloc extends Bloc<UserFollowEvent, UserFollowState> {
 
   void _loadFollower(LoadFollower event, Emitter<UserFollowState> emit) async {
     emit(UserFollowerInit());
-    print('#####INIT');
     try {
       if (event.name.isEmpty || event.name == '') {
         emit(UserFollowInitial());
-        print('#####INITial');
       } else {
-        String page = 'follower';
+        String page = 'followers';
         final result = await githubRepositorySearch.getFollowerResults(
             name: event.name, link: page);
         emit(UserFollowerLoaded(result));
-        print('#####Loaded');
       }
     } catch (e) {
-      print('#####error');
-
       emit(e is SearchResultError
           ? UserFollowerError(e.message)
           : const UserFollowerError('Something went wrong!'));

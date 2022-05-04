@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_flutter_bloc/modules/bloc/user_follow/user_follow_bloc.dart';
+import 'package:github_flutter_bloc/modules/bloc/user_profile/user_profile_bloc.dart';
 import 'package:github_flutter_bloc/modules/screen/repository_screen.dart';
 
 class UserFollowersView extends StatelessWidget {
@@ -31,28 +32,53 @@ class UserFollowersView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Text(state.items[index].login.toString()),
-                                Text(state.items[index].htmlUrl.toString()),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    state.items[index].login.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 172, 208, 237),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Text(
+                                  state.items[index].htmlUrl.toString(),
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 172, 208, 237),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
                               ],
                             ),
                           ),
                         ),
                         Align(
-                          alignment: Alignment.topCenter,
+                          alignment: Alignment.bottomCenter,
                           child: SizedBox(
                             child: CircleAvatar(
                               radius: 40.0,
                               backgroundColor: Colors.white,
                               child: CircleAvatar(
-                                  child: const Align(
+                                  child: Align(
                                     alignment: Alignment.bottomRight,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 12.0,
-                                      child: Icon(
-                                        Icons.camera_alt,
-                                        size: 15.0,
-                                        color: Color(0xFF404040),
+                                    child: GestureDetector(
+                                      onTap: () => context
+                                          .read<UserProfileBloc>()
+                                          .add(OnSearch(
+                                              name: state.items[index].login
+                                                  .toString())),
+                                      child: const CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        radius: 12.0,
+                                        child: Icon(
+                                          Icons.search,
+                                          size: 15.0,
+                                          color: Color(0xFF404040),
+                                        ),
                                       ),
                                     ),
                                   ),
