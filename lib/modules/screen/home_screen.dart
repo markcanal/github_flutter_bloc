@@ -75,9 +75,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     onPressed: () {
                       // searchBloc.add(OnPress(text: searchController.text));
                       if (selectedIndex == 1) {
-                        context
-                            .read<UserProfileBloc>()
-                            .add(OnSearch(name: searchController.text));
+                        if (searchController.text == '') {
+                          context.read<UserProfileBloc>().add(const OnLoad());
+                        } else {
+                          context
+                              .read<UserProfileBloc>()
+                              .add(OnSearch(name: searchController.text));
+                          context
+                              .read<UserRepositoryBloc>()
+                              .add(OnPress(text: searchController.text));
+                        }
                       } else {
                         context
                             .read<UserRepositoryBloc>()
@@ -96,6 +103,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 selectedIndex = value;
                 searchController.text = '';
               });
+              if (selectedIndex == 0) {
+                context
+                    .read<UserRepositoryBloc>()
+                    .add(OnPress(text: searchController.text));
+              } else if (selectedIndex == 1) {
+                context
+                    .read<UserProfileBloc>()
+                    .add(OnSearch(name: searchController.text));
+              }
             },
             tabs: [
               Tab(

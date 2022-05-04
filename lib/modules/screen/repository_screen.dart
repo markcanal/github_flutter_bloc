@@ -51,7 +51,7 @@ class ScreenBody extends StatelessWidget {
                         itemCount: state.items.length,
                         itemBuilder: (context, intx) {
                           return Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             // crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Card(
@@ -59,32 +59,32 @@ class ScreenBody extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          color:
-                                              Colors.blueGrey.withOpacity(0.3),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 5, vertical: 10),
-                                              child: CircleAvatar(
-                                                backgroundImage: NetworkImage(
-                                                    state.items[intx].owner
-                                                        .avatarUrl),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    // Expanded(
+                                    //   flex: 1,
+                                    //   child: Container(
+                                    //     margin: EdgeInsets.symmetric(
+                                    //         vertical: 10, horizontal: 10),
+                                    //     decoration: BoxDecoration(
+                                    //       borderRadius:
+                                    //           BorderRadius.circular(40),
+                                    //       color:
+                                    //           Colors.blueGrey.withOpacity(0.3),
+                                    //     ),
+                                    //     child: Column(
+                                    //       children: [
+                                    //         Container(
+                                    //           padding: EdgeInsets.symmetric(
+                                    //               horizontal: 5, vertical: 10),
+                                    //           child: CircleAvatar(
+                                    //             backgroundImage: NetworkImage(
+                                    //                 state.items[intx].owner
+                                    //                     .avatarUrl),
+                                    //           ),
+                                    //         ),
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Expanded(
                                       flex: 4,
                                       child: Container(
@@ -100,16 +100,16 @@ class ScreenBody extends StatelessWidget {
                                                 style: TextStyle(
                                                     color: Colors.blue,
                                                     fontSize: 16),
-                                                textAlign: TextAlign.left,
+                                                textAlign: TextAlign.center,
                                               ),
                                               Text(state.items[intx].fullName,
                                                   style:
                                                       TextStyle(fontSize: 12),
-                                                  textAlign: TextAlign.left),
+                                                  textAlign: TextAlign.center),
                                               TextButton(
                                                 style: ButtonStyle(
                                                     alignment:
-                                                        Alignment.centerLeft),
+                                                        Alignment.center),
                                                 onPressed: () {
                                                   Uri url = Uri.parse(state
                                                       .items[intx].htmlUrl);
@@ -120,7 +120,7 @@ class ScreenBody extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontSize: 11,
                                                       color: Colors.blue),
-                                                  textAlign: TextAlign.left,
+                                                  textAlign: TextAlign.center,
                                                 ),
                                               ),
                                               state.items[intx].description ==

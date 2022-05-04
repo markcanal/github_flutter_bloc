@@ -33,9 +33,13 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     emit(UserProfileOnSearch());
 
     try {
-      final result =
-          await githubRepositorySearch.getUserProfile(name: event.name);
-      emit(UserProfileSearchFind(result));
+      if (event.name.isEmpty || event.name == '') {
+        emit(UserProfileInitial());
+      } else {
+        final result =
+            await githubRepositorySearch.getUserProfile(name: event.name);
+        emit(UserProfileSearchFind(result));
+      }
     } catch (e) {
       emit(
         e is SearchResultError

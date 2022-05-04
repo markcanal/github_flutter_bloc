@@ -27,4 +27,12 @@ class GithubRepositorySearch {
     print('###Repository Search result for $name: $result');
     return result;
   }
+
+  Future<GitHubProfileModel> getFollowResults(
+      {String? name, String? link}) async {
+    final result =
+        await gitHubApiService.userProfile(userName: name, page: link);
+    print('###Followers  result for $name: $result');
+    return result;
+  }
 }
