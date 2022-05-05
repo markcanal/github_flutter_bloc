@@ -9,6 +9,8 @@ abstract class UserProfileState extends Equatable {
 
 class UserProfileInitial extends UserProfileState {}
 
+class UserProfileInLoadStart extends UserProfileState {}
+
 class UserProfileInLoadAll extends UserProfileState {
   const UserProfileInLoadAll(this.items);
 

@@ -99,13 +99,17 @@ class ScreenBody extends StatelessWidget {
                                               Text(
                                                 state.items[intx].name,
                                                 style: TextStyle(
-                                                    color: Colors.blue,
+                                                    color: const Color.fromARGB(
+                                                        255, 172, 208, 237),
                                                     fontSize: 16),
                                                 textAlign: TextAlign.center,
                                               ),
                                               Text(state.items[intx].fullName,
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: const Color.fromARGB(
+                                                        255, 172, 208, 237),
+                                                  ),
                                                   textAlign: TextAlign.center),
                                               TextButton(
                                                 style: ButtonStyle(
@@ -119,8 +123,10 @@ class ScreenBody extends StatelessWidget {
                                                 child: Text(
                                                   state.items[intx].htmlUrl,
                                                   style: TextStyle(
-                                                      fontSize: 11,
-                                                      color: Colors.blue),
+                                                    fontSize: 11,
+                                                    color: const Color.fromARGB(
+                                                        255, 172, 208, 237),
+                                                  ),
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ),
@@ -138,7 +144,14 @@ class ScreenBody extends StatelessWidget {
                                                         Text(
                                                             '** Project Description **',
                                                             style: TextStyle(
-                                                                fontSize: 11),
+                                                              fontSize: 11,
+                                                              color: const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  172,
+                                                                  208,
+                                                                  237),
+                                                            ),
                                                             textAlign: TextAlign
                                                                 .center),
                                                         Divider(
@@ -148,7 +161,14 @@ class ScreenBody extends StatelessWidget {
                                                             state.items[intx]
                                                                 .description,
                                                             style: TextStyle(
-                                                                fontSize: 11),
+                                                              fontSize: 11,
+                                                              color: const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  172,
+                                                                  208,
+                                                                  237),
+                                                            ),
                                                             textAlign: TextAlign
                                                                 .justify),
                                                         Divider(

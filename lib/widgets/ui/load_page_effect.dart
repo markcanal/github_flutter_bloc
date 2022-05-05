@@ -10,83 +10,31 @@ class LoadPageEffect {
     );
   }
 
-  Widget userListSkeleton() {
+  Widget profileSkeleton() {
     return Shimmer.fromColors(
         baseColor: Colors.blueGrey,
         highlightColor: Colors.blue,
         enabled: true,
         child: ListView.builder(
           itemBuilder: (_, __) => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Card(
-                elevation: 5,
+              Container(
+                color: Colors.blueGrey,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(50)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 10),
-                                child: const CircleAvatar(
-                                  radius: 40,
-                                ),
-                              ),
-                              const Text(
-                                "",
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              const Text(
-                                "",
-                                style: TextStyle(fontSize: 11),
-                              )
-                            ],
-                          ),
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: const CircleAvatar(
+                        // backgroundImage: NetworkImage(avatarUrl),
+                        radius: 40,
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                "",
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 16),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text("",
-                                  style: TextStyle(fontSize: 12),
-                                  textAlign: TextAlign.center),
-                              Text("",
-                                  style: TextStyle(fontSize: 11),
-                                  textAlign: TextAlign.center),
-                              Column(
-                                children: [
-                                  Divider(),
-                                  Text('** Project Description **',
-                                      style: TextStyle(fontSize: 11),
-                                      textAlign: TextAlign.center),
-                                  Divider(),
-                                  Text("",
-                                      style: TextStyle(fontSize: 11),
-                                      textAlign: TextAlign.justify),
-                                ],
-                              )
-                            ],
-                          )),
+                    Container(
+                      height: 50,
                     )
                   ],
                 ),
@@ -97,7 +45,7 @@ class LoadPageEffect {
         ));
   }
 
-  Widget userFollowSkeleton() {
+  Widget userSkeleton() {
     return Shimmer.fromColors(
         baseColor: Colors.blueGrey,
         highlightColor: Colors.blue,
@@ -112,7 +60,7 @@ class LoadPageEffect {
                 Container(
                   margin: const EdgeInsets.only(right: 14.0),
                   child: const CircleAvatar(
-                      backgroundColor: Colors.white, radius: 40),
+                      backgroundColor: Colors.white, radius: 30),
                 ),
                 Expanded(
                     child: Column(
@@ -142,7 +90,7 @@ class LoadPageEffect {
   Widget repositorySkeleton() {
     return Shimmer.fromColors(
         baseColor: Colors.blueGrey,
-        highlightColor: Colors.grey,
+        highlightColor: Colors.blue,
         enabled: true,
         child: ListView.builder(
           itemBuilder: (_, __) => Column(
@@ -195,12 +143,7 @@ class LoadPageEffect {
                             height: 1,
                           ),
                           Container(
-                            margin: const EdgeInsets.all(5),
-                            child: const Text(
-                              "",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
-                            ),
+                            height: 5,
                           ),
                         ],
                       )

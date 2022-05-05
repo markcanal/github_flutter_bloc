@@ -18,9 +18,13 @@ class UserScreen extends StatelessWidget {
         Expanded(
           child: BlocBuilder<UserProfileBloc, UserProfileState>(
             builder: (context, state) {
+              if (state is UserProfileInLoadStart) {
+                return LoadPageEffect()
+                    .shimmerMe(LoadPageEffect().userSkeleton());
+              }
               if (state is UserProfileOnSearch) {
                 return LoadPageEffect()
-                    .shimmerMe(LoadPageEffect().userFollowSkeleton());
+                    .shimmerMe(LoadPageEffect().profileSkeleton());
               }
               if (state is UserProfileInLoadAll) {
                 return state.items.isEmpty

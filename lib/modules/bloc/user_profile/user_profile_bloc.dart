@@ -20,6 +20,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     emit(UserProfileInitial());
 
     try {
+      emit(UserProfileInLoadStart());
       final result = await githubRepositorySearch.getUserList();
       emit(UserProfileInLoadAll(result));
     } catch (e) {

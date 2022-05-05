@@ -81,7 +81,7 @@ class UserProfile extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                location.isEmpty
+                                location.isEmpty || location == 'null'
                                     ? Container()
                                     : Container(
                                         padding:
